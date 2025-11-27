@@ -2,16 +2,12 @@
   "version": 2,
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "builds": [
-    {
-      "src": "server/vercel.ts",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "server/vercel.ts"
-    }
+  "outputDirectory": "dist/public",
+  "rewrites": [
+    { "source": "/api/contact", "destination": "/api/contact" },
+    { "source": "/api/contacts", "destination": "/api/contacts" },
+    { "source": "/api/enquiry", "destination": "/api/enquiry" },
+    { "source": "/api/enquiries", "destination": "/api/enquiries" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
