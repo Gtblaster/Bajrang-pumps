@@ -1,8 +1,17 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "framework": null,
-  "outputDirectory": "dist"
+  "builds": [
+    {
+      "src": "server/vercel.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "server/vercel.ts"
+    }
+  ]
 }
