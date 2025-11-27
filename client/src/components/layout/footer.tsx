@@ -99,9 +99,10 @@ export function Footer() {
                 <li className="flex items-start gap-3">
                   <MapPin className="h-5 w-5 text-accent shrink-0 mt-0.5" />
                   <span className="text-background/70 text-sm">
-                    Industrial Area Phase II,<br />
-                    Sector 45, Gurugram,<br />
-                    Haryana 122003, India
+                    A/P Kadakozer,<br />
+                    Tal. Chandwad,<br />
+                    Dist. Nashik,<br />
+                    Maharashtra 423117, India
                   </span>
                 </li>
                 <li className="flex items-center gap-3">

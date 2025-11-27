@@ -50,7 +50,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Address",
-    content: "Industrial Area Phase II, Sector 45, Gurugram, Haryana 122003, India",
+    content: "A/P Kadakozer Tal. Chandwad Dist.Nashik 423117,Maharashtra India",
     link: "https://maps.google.com",
   },
   {
