@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import {
   Form,
   FormControl,
@@ -38,8 +37,8 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Phone",
-    content: "+91 98765 43210",
-    link: "tel:+919876543210",
+    content: "+91 82630 15851",
+    link: "tel:+9182630 15851",
   },
   {
     icon: Mail,
@@ -51,7 +50,7 @@ const contactInfo = [
     icon: MapPin,
     title: "Address",
     content: "A/P Kadakozer Tal. Chandwad Dist.Nashik 423117,Maharashtra India",
-    link: "https://maps.google.com",
+    link: "https://maps.app.goo.gl/eswhqu35uwzWQ8pd8",
   },
   {
     icon: Clock,
@@ -90,7 +89,7 @@ function AnimatedSection({
 function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/919876543210?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20pumps."
+      href="https://wa.me/918263015851?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20pumps."
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#25D366] text-white px-4 py-3 rounded-full shadow-lg transition-transform hover:scale-105"
@@ -242,7 +241,7 @@ export default function Contact() {
                                 <FormControl>
                                   <Input 
                                     type="tel" 
-                                    placeholder="+91 98765 43210" 
+                                    placeholder="+91 82630 15851" 
                                     {...field}
                                     data-testid="input-contact-phone"
                                   />
@@ -339,14 +338,14 @@ export default function Contact() {
                   <CardContent className="p-0">
                     <div className="aspect-video w-full">
                       <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.0233925989057!2d77.0266!3d28.4595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDI3JzM0LjIiTiA3N8KwMDEnMzUuOCJF!5e0!3m2!1sen!2sin!4v1699000000000!5m2!1sen!2sin"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3741.8447!2d74.2397!3d20.3447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddf0e0e0e0e0e0%3A0x0!2zMjDCsDIwJzQxLjAiTiA3NMKwMTQnMjMuMCJF!5e0!3m2!1sen!2sin!4v1699000000000!5m2!1sen!2sin"
                         width="100%"
                         height="100%"
                         style={{ border: 0 }}
                         allowFullScreen
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
-                        title="Bajrang Pumps Location"
+                        title="Bajrang Pumps Location - Kadakozer, Chandwad, Nashik"
                         data-testid="map-google"
                       />
                     </div>
@@ -365,7 +364,7 @@ export default function Contact() {
                       Get instant responses to your queries on WhatsApp
                     </p>
                     <a
-                      href="https://wa.me/919876543210?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20pumps."
+                      href="https://wa.me/918263015851?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20pumps."
                       target="_blank"
                       rel="noopener noreferrer"
                       data-testid="button-whatsapp-contact"
