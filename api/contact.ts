@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { storage } from '../server/storage';
 import { insertContactSchema } from '../shared/schema';
+import { sendContactEmail } from '../server/email';
 import { z } from 'zod';
 import { fromError } from 'zod-validation-error';
 
@@ -22,6 +23,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const validatedData = insertContactSchema.parse(req.body);
     const contact = await storage.createContact(validatedData);
+    
+    // Send email notification
+    await sendContactEmail(validatedData);
+    
     return res.status(201).json({
       success: true,
       message: 'Contact form submitted successfully',
