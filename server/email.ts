@@ -7,7 +7,7 @@ const createTransporter = () => {
   return nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.SMTP_USER || 'thoratghanshyam4@gmail.com',
+      user: process.env.SMTP_USER || 'thoratenterprises27@gmail.com',
       pass: process.env.SMTP_PASS, // Gmail App Password
     },
   });
@@ -23,7 +23,7 @@ export async function sendContactEmail(data: {
     const transporter = createTransporter();
 
     const mailOptions = {
-      from: process.env.SMTP_USER || 'thoratghanshyam4@gmail.com',
+      from: process.env.SMTP_USER || 'thoratenterprises27@gmail.com',
       to: 'thoratghanshyam4@gmail.com',
       subject: `New Contact Form Submission from ${data.name}`,
       html: `
@@ -86,7 +86,7 @@ export async function sendEnquiryEmail(data: {
     const transporter = createTransporter();
 
     const mailOptions = {
-      from: process.env.SMTP_USER || 'thoratghanshyam4@gmail.com',
+      from: process.env.SMTP_USER || 'thoratenterprises27@gmail.com',
       to: 'thoratghanshyam4@gmail.com',
       subject: `New Product Enquiry from ${data.name} - ${data.pumpType}`,
       html: `
