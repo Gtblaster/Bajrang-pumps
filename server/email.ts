@@ -1,4 +1,6 @@
 import nodemailer from 'nodemailer';
+import { getExcelFilePath } from './excel';
+import { existsSync } from 'fs';
 
 // Create reusable transporter
 const createTransporter = () => {
@@ -21,6 +23,7 @@ export async function sendContactEmail(data: {
 }) {
   try {
     const transporter = createTransporter();
+    const excelFilePath = getExcelFilePath();
 
     const mailOptions = {
       from: process.env.SMTP_USER || 'thoratenterprises27@gmail.com',
@@ -48,6 +51,7 @@ export async function sendContactEmail(data: {
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 12px;">
             <p>This email was sent from the Bajrang Pumps contact form.</p>
             <p>Submitted on: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
+            <p><strong>Note:</strong> All form submissions are also saved in the attached Excel file.</p>
           </div>
         </div>
       `,
@@ -62,7 +66,14 @@ Message:
 ${data.message}
 
 Submitted on: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+
+Note: All form submissions are also saved in the attached Excel file.
       `,
+      attachments: existsSync(excelFilePath) ? [{
+        filename: 'contact_submissions.xlsx',
+        path: excelFilePath,
+        contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      }] : []
     };
 
     await transporter.sendMail(mailOptions);
@@ -84,6 +95,7 @@ export async function sendEnquiryEmail(data: {
 }) {
   try {
     const transporter = createTransporter();
+    const excelFilePath = getExcelFilePath();
 
     const mailOptions = {
       from: process.env.SMTP_USER || 'thoratenterprises27@gmail.com',
@@ -119,6 +131,7 @@ export async function sendEnquiryEmail(data: {
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #6b7280; font-size: 12px;">
             <p>This email was sent from the Bajrang Pumps enquiry form.</p>
             <p>Submitted on: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}</p>
+            <p><strong>Note:</strong> All form submissions are also saved in the attached Excel file.</p>
           </div>
         </div>
       `,
@@ -136,7 +149,14 @@ Quantity: ${data.quantity}
 ${data.message ? `Additional Message:\n${data.message}` : ''}
 
 Submitted on: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+
+Note: All form submissions are also saved in the attached Excel file.
       `,
+      attachments: existsSync(excelFilePath) ? [{
+        filename: 'contact_submissions.xlsx',
+        path: excelFilePath,
+        contentType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      }] : []
     };
 
     await transporter.sendMail(mailOptions);
