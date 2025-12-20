@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { insertContactSchema, insertEnquirySchema } from "@shared/schema";
 import { sendContactEmail, sendEnquiryEmail } from "./email";
 import { saveContactToExcel, saveEnquiryToExcel } from "./excel";
+import { saveContactToGoogleSheets, saveEnquiryToGoogleSheets } from "./googleSheets";
 import { z } from "zod";
 import { fromError } from "zod-validation-error";
 
@@ -20,8 +21,8 @@ export async function registerRoutes(
       // Send email notification
       await sendContactEmail(validatedData);
       
-      // Save to Excel file
-      const excelData = {
+      // Prepare data for saving
+      const saveData = {
         id: contact.id,
         name: validatedData.name,
         email: validatedData.email,
@@ -30,7 +31,11 @@ export async function registerRoutes(
         submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
       };
       
-      saveContactToExcel(excelData);
+      // Save to Excel file
+      saveContactToExcel(saveData);
+      
+      // Save to Google Sheets
+      await saveContactToGoogleSheets(saveData);
       
       res.status(201).json({ 
         success: true, 
@@ -73,8 +78,8 @@ export async function registerRoutes(
       // Send email notification
       await sendEnquiryEmail(validatedData);
       
-      // Save to Excel file
-      const excelData = {
+      // Prepare data for saving
+      const saveData = {
         id: enquiry.id,
         name: validatedData.name,
         email: validatedData.email,
@@ -86,7 +91,11 @@ export async function registerRoutes(
         submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
       };
       
-      saveEnquiryToExcel(excelData);
+      // Save to Excel file
+      saveEnquiryToExcel(saveData);
+      
+      // Save to Google Sheets
+      await saveEnquiryToGoogleSheets(saveData);
       
       res.status(201).json({ 
         success: true, 

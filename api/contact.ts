@@ -3,6 +3,7 @@ import { storage } from '../server/storage';
 import { insertContactSchema } from '../shared/schema';
 import { sendContactEmail } from '../server/email';
 import { saveContactToExcel } from '../server/excel';
+import { saveContactToGoogleSheets } from '../server/googleSheets';
 import { z } from 'zod';
 import { fromError } from 'zod-validation-error';
 
@@ -28,8 +29,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Send email notification
     await sendContactEmail(validatedData);
     
-    // Save to Excel file
-    const excelData = {
+    // Prepare data for saving
+    const saveData = {
       id: contact.id,
       name: validatedData.name,
       email: validatedData.email,
@@ -38,7 +39,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
     };
     
-    saveContactToExcel(excelData);
+    // Save to Excel file
+    saveContactToExcel(saveData);
+    
+    // Save to Google Sheets
+    await saveContactToGoogleSheets(saveData);
     
     return res.status(201).json({
       success: true,

@@ -3,6 +3,7 @@ import { storage } from '../server/storage';
 import { insertEnquirySchema } from '../shared/schema';
 import { sendEnquiryEmail } from '../server/email';
 import { saveEnquiryToExcel } from '../server/excel';
+import { saveEnquiryToGoogleSheets } from '../server/googleSheets';
 import { z } from 'zod';
 import { fromError } from 'zod-validation-error';
 
@@ -28,8 +29,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Send email notification
     await sendEnquiryEmail(validatedData);
     
-    // Save to Excel file
-    const excelData = {
+    // Prepare data for saving
+    const saveData = {
       id: enquiry.id,
       name: validatedData.name,
       email: validatedData.email,
@@ -41,7 +42,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
     };
     
-    saveEnquiryToExcel(excelData);
+    // Save to Excel file
+    saveEnquiryToExcel(saveData);
+    
+    // Save to Google Sheets
+    await saveEnquiryToGoogleSheets(saveData);
     
     return res.status(201).json({
       success: true,
