@@ -27,8 +27,13 @@ const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_ID || '';
 
 export async function saveContactToGoogleSheetsSimple(data: ContactData) {
   try {
+    console.log('🔍 Debug - GOOGLE_API_KEY:', GOOGLE_API_KEY ? 'Present' : 'Missing');
+    console.log('🔍 Debug - SPREADSHEET_ID:', SPREADSHEET_ID ? 'Present' : 'Missing');
+    
     if (!GOOGLE_API_KEY || !SPREADSHEET_ID) {
       console.log('⚠️ Google Sheets not configured, skipping');
+      console.log('API Key:', GOOGLE_API_KEY ? 'Set' : 'Not set');
+      console.log('Sheet ID:', SPREADSHEET_ID ? 'Set' : 'Not set');
       return { success: false, error: 'Not configured' };
     }
 
