@@ -43,8 +43,8 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    content: "info@bajrangpumps.com",
-    link: "mailto:info@bajrangpumps.com",
+    content: "thoratenterprises27@gmail.com",
+    link: "mailto:thoratenterprises27@gmail.com",
   },
   {
     icon: MapPin,
@@ -241,7 +241,7 @@ export default function Contact() {
                                 <FormControl>
                                   <Input 
                                     type="tel" 
-                                    placeholder="+91 82630 15851" 
+                                    placeholder="+91 12345 67890" 
                                     {...field}
                                     data-testid="input-contact-phone"
                                   />

@@ -33,10 +33,10 @@ const features = [
 ];
 
 const stats = [
-  { icon: Award, value: "30+", label: "Years Experience" },
-  { icon: Users, value: "10K+", label: "Happy Customers" },
-  { icon: Factory, value: "50+", label: "Dealers Nationwide" },
-  { icon: Droplets, value: "100K+", label: "Pumps Delivered" },
+  { icon: Award, value: "5+", label: "Years Experience" },
+  { icon: Users, value: "1K+", label: "Happy Customers" },
+  { icon: Factory, value: "10+", label: "Dealers Nationwide" },
+  { icon: Droplets, value: "1000+", label: "Pumps Delivered" },
 ];
 
 const productShowcase = [
@@ -97,7 +97,7 @@ export default function Home() {
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6 animate-fade-in-down">
               <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-              <span className="text-white/90 text-sm font-medium">Trusted by 10,000+ customers across India</span>
+              <span className="text-white/90 text-sm font-medium">Trusted by 1000+ customers across India</span>
             </div>
             
             <h1 
@@ -278,7 +278,7 @@ export default function Home() {
               
               <ul className="space-y-4 mb-8">
                 {[
-                  "ISO 9001:2015 Certified Manufacturing",
+                  "ISO 9001:2025 Certified Manufacturing",
                   "100% Quality Testing Before Dispatch",
                   "Premium Grade Stainless Steel Components",
                   "2-Year Comprehensive Warranty",
@@ -308,7 +308,7 @@ export default function Home() {
                   className="w-full rounded-xl shadow-lg"
                 />
                 <div className="absolute -bottom-6 -right-6 bg-accent text-white p-4 rounded-xl shadow-lg">
-                  <div className="text-2xl font-bold">30+</div>
+                  <div className="text-2xl font-bold">5+</div>
                   <div className="text-sm text-white/80">Years of Trust</div>
                 </div>
               </div>

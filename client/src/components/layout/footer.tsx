@@ -108,21 +108,21 @@ export function Footer() {
                 <li className="flex items-center gap-3">
                   <Phone className="h-5 w-5 text-accent shrink-0" />
                   <a 
-                    href="tel:+919876543210" 
+                    href="tel:+918263015851" 
                     className="text-background/70 hover:text-accent transition-colors text-sm"
                     data-testid="link-footer-phone"
                   >
-                    +91 98765 43210
+                    +91 82630 15851
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="h-5 w-5 text-accent shrink-0" />
                   <a 
-                    href="mailto:info@bajrangpumps.com" 
+                    href="mailto:thoratenterprises27@gmail.com" 
                     className="text-background/70 hover:text-accent transition-colors text-sm"
                     data-testid="link-footer-email"
                   >
-                    info@bajrangpumps.com
+                    thoratenterprises27@gmail.com
                   </a>
                 </li>
                 <li className="flex items-center gap-3">
