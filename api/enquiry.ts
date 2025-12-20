@@ -2,6 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { storage } from '../server/storage';
 import { insertEnquirySchema } from '../shared/schema';
 import { sendEnquiryEmail } from '../server/email';
+import { saveEnquiryToExcel } from '../server/excel';
 import { z } from 'zod';
 import { fromError } from 'zod-validation-error';
 
@@ -26,6 +27,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     
     // Send email notification
     await sendEnquiryEmail(validatedData);
+    
+    // Save to Excel file
+    const excelData = {
+      id: enquiry.id,
+      name: validatedData.name,
+      email: validatedData.email,
+      phone: validatedData.phone,
+      company: validatedData.company,
+      pumpType: validatedData.pumpType,
+      quantity: validatedData.quantity,
+      message: validatedData.message,
+      submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+    };
+    
+    saveEnquiryToExcel(excelData);
     
     return res.status(201).json({
       success: true,

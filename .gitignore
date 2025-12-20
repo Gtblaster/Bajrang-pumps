@@ -10,6 +10,10 @@ vite.config.ts.*
 .env.local
 .env.*.local
 
+# Excel files
+contact_submissions.xlsx
+*.xlsx
+
 # Logs
 *.log
 npm-debug.log*

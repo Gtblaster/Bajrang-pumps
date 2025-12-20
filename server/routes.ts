@@ -2,6 +2,8 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSchema, insertEnquirySchema } from "@shared/schema";
+import { sendContactEmail, sendEnquiryEmail } from "./email";
+import { saveContactToExcel, saveEnquiryToExcel } from "./excel";
 import { z } from "zod";
 import { fromError } from "zod-validation-error";
 
@@ -14,6 +16,22 @@ export async function registerRoutes(
     try {
       const validatedData = insertContactSchema.parse(req.body);
       const contact = await storage.createContact(validatedData);
+      
+      // Send email notification
+      await sendContactEmail(validatedData);
+      
+      // Save to Excel file
+      const excelData = {
+        id: contact.id,
+        name: validatedData.name,
+        email: validatedData.email,
+        phone: validatedData.phone,
+        message: validatedData.message,
+        submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+      };
+      
+      saveContactToExcel(excelData);
+      
       res.status(201).json({ 
         success: true, 
         message: "Contact form submitted successfully",
@@ -51,6 +69,25 @@ export async function registerRoutes(
     try {
       const validatedData = insertEnquirySchema.parse(req.body);
       const enquiry = await storage.createEnquiry(validatedData);
+      
+      // Send email notification
+      await sendEnquiryEmail(validatedData);
+      
+      // Save to Excel file
+      const excelData = {
+        id: enquiry.id,
+        name: validatedData.name,
+        email: validatedData.email,
+        phone: validatedData.phone,
+        company: validatedData.company,
+        pumpType: validatedData.pumpType,
+        quantity: validatedData.quantity,
+        message: validatedData.message,
+        submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+      };
+      
+      saveEnquiryToExcel(excelData);
+      
       res.status(201).json({ 
         success: true, 
         message: "Enquiry submitted successfully. Our sales team will contact you shortly.",
