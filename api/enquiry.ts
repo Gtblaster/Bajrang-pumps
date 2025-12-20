@@ -1,9 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { storage } from '../server/storage';
 import { insertEnquirySchema } from '../shared/schema';
-import { sendEnquiryEmail } from '../server/email';
 import { saveEnquiryToExcel } from '../server/excel';
-import { saveEnquiryToGoogleSheets } from '../server/googleSheets';
+import { saveEnquiryToGoogleSheetsSimple } from '../server/googleSheetsSimple';
 import { z } from 'zod';
 import { fromError } from 'zod-validation-error';
 
@@ -26,9 +25,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const validatedData = insertEnquirySchema.parse(req.body);
     const enquiry = await storage.createEnquiry(validatedData);
     
-    // Send email notification
-    await sendEnquiryEmail(validatedData);
-    
     // Prepare data for saving
     const saveData = {
       id: enquiry.id,
@@ -45,8 +41,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Save to Excel file
     saveEnquiryToExcel(saveData);
     
-    // Save to Google Sheets
-    await saveEnquiryToGoogleSheets(saveData);
+    // Save to Google Sheets (real-time online save)
+    await saveEnquiryToGoogleSheetsSimple(saveData);
     
     return res.status(201).json({
       success: true,

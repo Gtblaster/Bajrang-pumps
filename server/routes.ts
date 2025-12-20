@@ -2,9 +2,8 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSchema, insertEnquirySchema } from "@shared/schema";
-import { sendContactEmail, sendEnquiryEmail } from "./email";
 import { saveContactToExcel, saveEnquiryToExcel } from "./excel";
-import { saveContactToGoogleSheets, saveEnquiryToGoogleSheets } from "./googleSheets";
+import { saveContactToGoogleSheetsSimple, saveEnquiryToGoogleSheetsSimple } from "./googleSheetsSimple";
 import { z } from "zod";
 import { fromError } from "zod-validation-error";
 
@@ -17,9 +16,6 @@ export async function registerRoutes(
     try {
       const validatedData = insertContactSchema.parse(req.body);
       const contact = await storage.createContact(validatedData);
-      
-      // Send email notification
-      await sendContactEmail(validatedData);
       
       // Prepare data for saving
       const saveData = {
@@ -34,8 +30,8 @@ export async function registerRoutes(
       // Save to Excel file
       saveContactToExcel(saveData);
       
-      // Save to Google Sheets
-      await saveContactToGoogleSheets(saveData);
+      // Save to Google Sheets (real-time online save)
+      await saveContactToGoogleSheetsSimple(saveData);
       
       res.status(201).json({ 
         success: true, 
@@ -75,9 +71,6 @@ export async function registerRoutes(
       const validatedData = insertEnquirySchema.parse(req.body);
       const enquiry = await storage.createEnquiry(validatedData);
       
-      // Send email notification
-      await sendEnquiryEmail(validatedData);
-      
       // Prepare data for saving
       const saveData = {
         id: enquiry.id,
@@ -94,8 +87,8 @@ export async function registerRoutes(
       // Save to Excel file
       saveEnquiryToExcel(saveData);
       
-      // Save to Google Sheets
-      await saveEnquiryToGoogleSheets(saveData);
+      // Save to Google Sheets (real-time online save)
+      await saveEnquiryToGoogleSheetsSimple(saveData);
       
       res.status(201).json({ 
         success: true, 
