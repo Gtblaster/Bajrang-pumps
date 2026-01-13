@@ -13,38 +13,38 @@ import submersiblePump from "@assets/generated_images/submersible_pump_product_s
 
 const timeline = [
   {
-    year: "1995",
+    year: "2021",
     title: "Company Founded",
     description: "Bajrang Pumps was established with a vision to provide quality water solutions to India.",
     icon: Calendar,
   },
   {
-    year: "2002",
+    year: "2022",
     title: "First Manufacturing Unit",
-    description: "Opened our first state-of-the-art manufacturing facility in Gurugram, Haryana.",
+    description: "Opened our first state-of-the-art manufacturing facility in Nashik, Maharashtra.",
     icon: Factory,
   },
   {
-    year: "2008",
+    year: "2025",
     title: "ISO Certification",
-    description: "Achieved ISO 9001:2008 certification for quality management systems.",
+    description: "Achieved ISO 9001:2024 certification for quality management systems.",
     icon: Award,
   },
   {
-    year: "2012",
+    year: "2025",
     title: "Pan-India Expansion",
     description: "Expanded dealer network to cover all major states across India.",
     icon: MapPin,
   },
   {
-    year: "2018",
+    year: "2025",
     title: "Export Operations",
-    description: "Started exporting pumps to Middle East and African countries.",
+    description: "Started exporting pumps to all Over Maharashtra.",
     icon: Truck,
   },
   {
-    year: "2024",
-    title: "30 Years of Excellence",
+    year: "2025",
+    title: "5 Years of Excellence",
     description: "Celebrating three decades of trust and quality service to customers.",
     icon: Star,
   },
@@ -66,7 +66,7 @@ const values = [
 const qualityPoints = [
   {
     icon: Shield,
-    title: "ISO 9001:2015 Certified",
+    title: "ISO 9001:2025 Certified",
     description: "Our manufacturing processes meet international quality standards.",
   },
   {
@@ -81,16 +81,16 @@ const qualityPoints = [
   },
   {
     icon: Clock,
-    title: "2-Year Warranty",
+    title: "1-Year Warranty",
     description: "Comprehensive warranty coverage for peace of mind.",
   },
 ];
 
 const achievements = [
-  { value: "30+", label: "Years Experience" },
-  { value: "10,000+", label: "Happy Customers" },
-  { value: "50+", label: "Dealers Nationwide" },
-  { value: "100K+", label: "Pumps Delivered" },
+  { value: "5+", label: "Years Experience" },
+  { value: "1,000+", label: "Happy Customers" },
+  { value: "5+", label: "Dealers Nationwide" },
+  { value: "1K+", label: "Pumps Delivered" },
 ];
 
 function AnimatedSection({ 
@@ -147,22 +147,22 @@ export default function About() {
                 Our Story
               </span>
               <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">
-                Powering India's Water Needs Since 1995
+                Powering India's Water Needs Since 2021
               </h2>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                Founded in 1995, Bajrang Pumps started as a small workshop with a big dream - 
+                Founded in 2021, Bajrang Pumps started as a small workshop with a big dream - 
                 to manufacture world-class pumps that would serve the diverse water needs of India. 
                 What began as a family enterprise has grown into one of the most trusted pump 
-                manufacturers in the country.
+                manufacturers in the India.
               </p>
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Over the past three decades, we have continuously evolved, embracing new technologies 
                 and manufacturing practices while staying true to our core values of quality, 
-                reliability, and customer satisfaction. Today, our pumps serve millions of homes, 
+                reliability, and customer satisfaction. Today, our pumps serve Thousands of homes, 
                 farms, and industries across India and beyond.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Our state-of-the-art manufacturing facility in Gurugram combines traditional 
+                Our state-of-the-art manufacturing facility in Nashik combines traditional 
                 craftsmanship with modern automation to produce pumps that meet the highest 
                 international standards. Every pump that leaves our factory carries with it 
                 our promise of excellence.
@@ -371,14 +371,14 @@ export default function About() {
                       Warranty & Support
                     </h2>
                     <p className="text-muted-foreground mb-6 leading-relaxed">
-                      We stand behind every pump we manufacture. Our comprehensive 2-year warranty 
+                      We stand behind every pump we manufacture. Our comprehensive 1-year warranty 
                       covers manufacturing defects and ensures you receive prompt support when needed.
                     </p>
                     <ul className="space-y-3">
                       {[
-                        "2-Year Comprehensive Warranty",
-                        "Free Technical Support",
-                        "Genuine Spare Parts",
+                        "1-Year Comprehensive Warranty",
+                        "Technical Support",
+                        "Genuine Parts",
                         "Authorized Service Centers",
                         "Quick Replacement Policy",
                       ].map((item) => (

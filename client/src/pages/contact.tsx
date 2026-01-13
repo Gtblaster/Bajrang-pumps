@@ -23,6 +23,7 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { apiRequest } from "@/lib/queryClient";
+import { sendContactEmail } from "@/lib/emailjs";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -117,7 +118,17 @@ export default function Contact() {
 
   const mutation = useMutation({
     mutationFn: async (data: ContactFormData) => {
+      // Send via server API (saves to database, Excel, etc.)
       const response = await apiRequest("POST", "/api/contact", data);
+      
+      // Also send via EmailJS for direct email delivery
+      try {
+        await sendContactEmail(data);
+        console.log('✅ EmailJS: Contact email sent successfully');
+      } catch (emailError) {
+        console.warn('⚠️ EmailJS: Failed to send email, but form was saved:', emailError);
+      }
+      
       return response;
     },
     onSuccess: () => {

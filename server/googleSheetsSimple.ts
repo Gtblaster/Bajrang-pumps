@@ -27,50 +27,8 @@ const SPREADSHEET_ID = process.env.GOOGLE_SHEETS_ID || '';
 
 export async function saveContactToGoogleSheetsSimple(data: ContactData) {
   try {
-    console.log('🔍 Debug - GOOGLE_API_KEY:', GOOGLE_API_KEY ? 'Present' : 'Missing');
-    console.log('🔍 Debug - SPREADSHEET_ID:', SPREADSHEET_ID ? 'Present' : 'Missing');
-    
-    if (!GOOGLE_API_KEY || !SPREADSHEET_ID) {
-      console.log('⚠️ Google Sheets not configured, skipping');
-      console.log('API Key:', GOOGLE_API_KEY ? 'Set' : 'Not set');
-      console.log('Sheet ID:', SPREADSHEET_ID ? 'Set' : 'Not set');
-      return { success: false, error: 'Not configured' };
-    }
-
-    // Prepare the row data
-    const values = [
-      [
-        data.id,
-        data.name,
-        data.email,
-        data.phone,
-        data.message,
-        data.submittedAt
-      ]
-    ];
-
-    // Use Google Sheets API to append data
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Contact Forms!A:F:append?valueInputOption=RAW&key=${GOOGLE_API_KEY}`;
-    
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        values: values,
-      }),
-    });
-
-    if (!response.ok) {
-      const error = await response.text();
-      console.error('❌ Google Sheets API error:', error);
-      return { success: false, error };
-    }
-
-    const result = await response.json();
-    console.log(`✅ Contact form data saved to Google Sheets: ${result.updates?.updatedCells} cells updated`);
-    return { success: true, result };
+    console.log('⚠️ Google Sheets integration temporarily disabled - data saved to Excel file instead');
+    return { success: false, error: 'Google Sheets requires OAuth2 authentication' };
   } catch (error) {
     console.error('❌ Error saving contact data to Google Sheets:', error);
     return { success: false, error };
