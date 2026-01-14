@@ -89,7 +89,7 @@ function AnimatedSection({
 function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/918263015851?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20pumps."
+      href="https://api.whatsapp.com/send?phone=918263015851&text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20pumps."
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#25D366] text-white px-4 py-3 rounded-full shadow-lg transition-transform hover:scale-105"
@@ -131,7 +131,8 @@ Message: ${data.message}
 
 Sent from Bajrang Pumps website`;
       
-      const whatsappUrl = `https://wa.me/918263015851?text=${encodeURIComponent(whatsappMessage)}`;
+      // Use WhatsApp Web URL that works on all devices
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=918263015851&text=${encodeURIComponent(whatsappMessage)}`;
       
       // Open WhatsApp in new tab
       window.open(whatsappUrl, '_blank');
@@ -383,7 +384,7 @@ Sent from Bajrang Pumps website`;
                       Get instant responses to your queries on WhatsApp
                     </p>
                     <a
-                      href="https://wa.me/918263015851?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20pumps."
+                      href="https://api.whatsapp.com/send?phone=918263015851&text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20pumps."
                       target="_blank"
                       rel="noopener noreferrer"
                       data-testid="button-whatsapp-contact"
