@@ -2,7 +2,6 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { storage } from '../server/storage';
 import { insertEnquirySchema } from '../shared/schema';
 import { saveEnquiryToExcel } from '../server/excel';
-import { saveEnquiryToGoogleSheetsSimple } from '../server/googleSheetsSimple';
 import { z } from 'zod';
 import { fromError } from 'zod-validation-error';
 
@@ -32,17 +31,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       email: validatedData.email,
       phone: validatedData.phone,
       company: validatedData.company,
-      pumpType: validatedData.pumpType,
-      quantity: validatedData.quantity,
-      message: validatedData.message,
+      pumpType: validatedData.productCategory, // Map productCategory to pumpType
+      quantity: '1', // Default quantity since it's not in the schema
+      message: validatedData.message || '',
       submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
     };
     
-    // Save to Excel file
+    // Save to Excel file only
     saveEnquiryToExcel(saveData);
-    
-    // Save to Google Sheets (real-time online save)
-    await saveEnquiryToGoogleSheetsSimple(saveData);
     
     return res.status(201).json({
       success: true,

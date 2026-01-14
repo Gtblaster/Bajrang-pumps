@@ -2,7 +2,6 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { storage } from '../server/storage';
 import { insertContactSchema } from '../shared/schema';
 import { saveContactToExcel } from '../server/excel';
-import { saveContactToGoogleSheetsSimple } from '../server/googleSheetsSimple';
 import { z } from 'zod';
 import { fromError } from 'zod-validation-error';
 
@@ -35,11 +34,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       submittedAt: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
     };
     
-    // Save to Excel file
+    // Save to Excel file only
     saveContactToExcel(saveData);
-    
-    // Save to Google Sheets (real-time online save)
-    await saveContactToGoogleSheetsSimple(saveData);
     
     return res.status(201).json({
       success: true,

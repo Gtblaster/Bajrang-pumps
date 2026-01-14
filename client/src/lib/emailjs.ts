@@ -6,7 +6,7 @@ emailjs.init({
 });
 
 // EmailJS configuration
-const EMAILJS_SERVICE_ID = 'service_id_here'; // You'll need to get this from EmailJS dashboard
+const EMAILJS_SERVICE_ID = 'service_4mtq60a'; // Your EmailJS Service ID
 const EMAILJS_TEMPLATE_ID = 'template_id_here'; // You'll need to get this from EmailJS dashboard
 
 export interface EmailData {

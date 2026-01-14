@@ -23,7 +23,6 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { apiRequest } from "@/lib/queryClient";
-import { sendContactEmail } from "@/lib/emailjs";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -118,16 +117,24 @@ export default function Contact() {
 
   const mutation = useMutation({
     mutationFn: async (data: ContactFormData) => {
-      // Send via server API (saves to database, Excel, etc.)
+      // Save to database and Excel file only
       const response = await apiRequest("POST", "/api/contact", data);
       
-      // Also send via EmailJS for direct email delivery
-      try {
-        await sendContactEmail(data);
-        console.log('✅ EmailJS: Contact email sent successfully');
-      } catch (emailError) {
-        console.warn('⚠️ EmailJS: Failed to send email, but form was saved:', emailError);
-      }
+      // Send message via WhatsApp
+      const whatsappMessage = `Hello! New contact form submission:
+
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+
+Message: ${data.message}
+
+Sent from Bajrang Pumps website`;
+      
+      const whatsappUrl = `https://wa.me/918263015851?text=${encodeURIComponent(whatsappMessage)}`;
+      
+      // Open WhatsApp in new tab
+      window.open(whatsappUrl, '_blank');
       
       return response;
     },
@@ -136,13 +143,13 @@ export default function Contact() {
       form.reset();
       toast({
         title: "Message Sent!",
-        description: "Thank you for contacting us. We'll get back to you soon.",
+        description: "Your message has been saved and sent via WhatsApp. We'll get back to you soon.",
       });
     },
     onError: () => {
       toast({
         title: "Error",
-        description: "Something went wrong. Please try again.",
+        description: "Something went wrong. Please try again or use WhatsApp chat.",
         variant: "destructive",
       });
     },
@@ -166,6 +173,7 @@ export default function Contact() {
             <p className="text-white/80 max-w-2xl mx-auto">
               Have questions or need assistance? Our team is here to help. 
               Reach out to us and we'll respond as soon as possible.
+              Perfer The Whatsapp For Better Comunication.
             </p>
           </div>
         </div>
