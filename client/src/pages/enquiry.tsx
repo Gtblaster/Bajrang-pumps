@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation } from "@tanstack/react-query";
-import { CheckCircle2, Loader2, Send, Droplets } from "lucide-react";
+import { CheckCircle2, Loader2, Send, Droplets, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -46,6 +46,21 @@ const productCategories = [
   { value: "agriculture-pumps", label: "Agriculture Pumps" },
   { value: "industrial-pumps", label: "Industrial Pumps" },
 ];
+
+function WhatsAppButton() {
+  return (
+    <a
+      href="https://wa.me/918263015851?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20pumps."
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#25D366] text-white px-4 py-3 rounded-full shadow-lg transition-transform hover:scale-105"
+      data-testid="button-whatsapp"
+    >
+      <MessageCircle className="h-5 w-5" />
+      <span className="font-medium hidden sm:inline">WhatsApp Us</span>
+    </a>
+  );
+}
 
 function AnimatedSection({ 
   children, 
@@ -90,7 +105,28 @@ export default function Enquiry() {
 
   const mutation = useMutation({
     mutationFn: async (data: EnquiryFormData) => {
+      // Save to database and Excel file only
       const response = await apiRequest("POST", "/api/enquiry", data);
+      
+      // Send enquiry via WhatsApp
+      const selectedCategory = productCategories.find(cat => cat.value === data.productCategory)?.label || data.productCategory;
+      
+      const whatsappMessage = `Hello! New product enquiry:
+
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+Product Category: ${selectedCategory}
+
+${data.message ? `Additional Requirements: ${data.message}` : ''}
+
+Sent from Bajrang Pumps website`;
+      
+      const whatsappUrl = `https://wa.me/918263015851?text=${encodeURIComponent(whatsappMessage)}`;
+      
+      // Open WhatsApp in new tab
+      window.open(whatsappUrl, '_blank');
+      
       return response;
     },
     onSuccess: () => {
@@ -98,13 +134,13 @@ export default function Enquiry() {
       form.reset();
       toast({
         title: "Enquiry Submitted!",
-        description: "Our sales team will contact you shortly.",
+        description: "Your enquiry has been saved and sent via WhatsApp. Our sales team will contact you shortly.",
       });
     },
     onError: () => {
       toast({
         title: "Error",
-        description: "Something went wrong. Please try again.",
+        description: "Something went wrong. Please try again or use WhatsApp chat.",
         variant: "destructive",
       });
     },
@@ -357,6 +393,8 @@ export default function Enquiry() {
           </AnimatedSection>
         </div>
       </section>
+
+      <WhatsAppButton />
     </div>
   );
 }
